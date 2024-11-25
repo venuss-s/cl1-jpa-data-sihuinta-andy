@@ -1,5 +1,6 @@
 package pe.edu.I202222350.cl1_jpa_data_sihuinta_andy;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,8 @@ import pe.edu.I202222350.cl1_jpa_data_sihuinta_andy.repository.CountryRepository
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.data.util.Optionals.ifPresentOrElse;
 
 @SpringBootApplication
 public class Cl1JpaDataSihuintaAndyApplication implements CommandLineRunner {
@@ -24,36 +27,42 @@ public class Cl1JpaDataSihuintaAndyApplication implements CommandLineRunner {
 
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 
 
 
-		//ifPresentOrElse()
-		//countryRepository.findById("ARG").ifPresentOrElse(country -> {
-			//	System.out.println("Idiomas de Argentina:");
-				//	country.getIdiomas().forEach(lang -> System.out.println(lang.getLanguage()));
+	//ifPresentOrElse()
+	//	countryRepository.findById("ARG").ifPresentOrElse(country -> {
+			//		System.out.println("Idiomas de Argentina:");
+				//	country.getIdiomas().forEach(lang -> System.out.println(lang.getLanguagePk().getLanguage()));
 			//	},
 			//	() -> countryRepository.findById("PER").ifPresent(country -> {
-				//System.out.println("Idiomas de Peru:");
-				//country.getIdiomas().forEach(lang -> System.out.println(lang.getLanguage()));
-		//	})
+				//	System.out.println("Idiomas de Peru:");
+				//	country.getIdiomas().forEach(lang -> System.out.println(lang.getLanguagePk().getLanguage()));
+			//	})
 	//	);
 
-//deleteAllById()
-	//List<String> countryCodes = List.of("COL", "ARG");
-	//countryCodes.stream().filter((item)->{
-	//		return countryRepository.existsById(item);
-	//	}).collect(Collectors.toList());
 
-	//	if (!countryCodes.isEmpty()) {
-	//		countryRepository.deleteAllById(countryCodes);
-	//	System.out.println("Países eliminados: COL y ARG.");
-	//	}else {
-	//		System.out.println("No country code found");
-	//	}
+		//deleteAllById()
+
+			List<String> countryCodes = List.of("COL", "ARG");
+	countryCodes.stream().filter((item)->{
+		return countryRepository.existsById(item);
+		}).collect(Collectors.toList());
+
+		if (!countryCodes.isEmpty()) {
+		countryRepository.deleteAllById(countryCodes);
+			System.out.println("Países eliminados: COL y ARG.");
+	}else {
+			System.out.println("No se encontro el codigo");
+		}
 
 	}
 }
+
+
+
 
 
 

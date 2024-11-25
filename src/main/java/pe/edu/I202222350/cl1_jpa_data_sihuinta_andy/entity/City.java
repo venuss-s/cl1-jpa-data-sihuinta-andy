@@ -1,7 +1,6 @@
 package pe.edu.I202222350.cl1_jpa_data_sihuinta_andy.entity;
 
 
-
 import jakarta.persistence.*;
 import lombok.*;
 

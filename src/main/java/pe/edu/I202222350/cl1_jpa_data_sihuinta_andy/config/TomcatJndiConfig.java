@@ -42,17 +42,7 @@ public class TomcatJndiConfig {
 
 
     }
-    @Bean
-    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> tomcatFactoryCustomizer(HikariDataSource hikariDataSource) {
-        return factory -> factory.addContextCustomizers(context -> {
-            try {
-                Context initCtx = new InitialContext();
-                initCtx.bind("java:comp/env/jdbc/Myworld", hikariDataSource);
-            } catch (NamingException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+
 
 
 
